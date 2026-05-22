@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function initApp() {
     const toggles = document.querySelectorAll('[data-confirm]');
     toggles.forEach(function (element) {
         element.addEventListener('click', function (event) {
@@ -15,7 +15,55 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.toggle('dark-mode');
         });
     }
-});
+
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const layoutWrapper = document.querySelector('.layout-wrapper');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+
+    function openSidebar() {
+        layoutWrapper?.classList.add('sidebar-open');
+        document.body.classList.add('sidebar-open');
+        if (sidebarToggle) sidebarToggle.setAttribute('aria-expanded', 'true');
+        // move focus to first nav link for accessibility
+        const firstLink = document.querySelector('.sidebar .nav-link');
+        if (firstLink) firstLink.focus();
+    }
+
+    function closeSidebar() {
+        layoutWrapper?.classList.remove('sidebar-open');
+        document.body.classList.remove('sidebar-open');
+        if (sidebarToggle) sidebarToggle.setAttribute('aria-expanded', 'false');
+        // return focus to toggle
+        if (sidebarToggle) sidebarToggle.focus();
+    }
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', openSidebar);
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+        sidebarToggle.setAttribute('aria-controls', 'sidebar');
+    }
+
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeSidebar);
+    }
+
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener('click', closeSidebar);
+    }
+
+    document.addEventListener('keyup', function (event) {
+        if (event.key === 'Escape') {
+            closeSidebar();
+        }
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
 
 // Job Card Print Selection Functions
 function toggleSelectAll(checkbox) {

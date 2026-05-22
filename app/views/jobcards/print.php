@@ -256,11 +256,22 @@
                 margin-bottom: 0;
                 box-shadow: none;
                 page-break-after: always;
+                padding: 5mm !important;
+                gap: 3mm !important;
+                width: 210mm !important;
+                height: 297mm !important;
+            }
+
+            .card-container {
+                width: 85.6mm !important;
+                height: 53.98mm !important;
+                flex-shrink: 0 !important;
             }
 
             .print-container {
-                max-width: 100%;
-                margin: 0;
+                max-width: 210mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             @page {

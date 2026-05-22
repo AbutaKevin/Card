@@ -29,6 +29,34 @@
     min-height: 100vh;
     background: linear-gradient(180deg, var(--brand) 0%, var(--brand-light) 100%);
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    width: 260px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    z-index: 1051;
+}
+.layout-wrapper {
+    min-height: 100vh;
+}
+.sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 1050;
+}
+.layout-wrapper.sidebar-open .sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+body.sidebar-open {
+    overflow: hidden;
+}
+.layout-wrapper.sidebar-open .sidebar {
+    transform: translateX(0);
 }
 .sidebar .nav-link {
     color: rgba(255,255,255,.9);
@@ -159,12 +187,165 @@ a:hover {
     box-shadow: 0 5px 18px rgba(0,0,0,0.04);
 }
 @media (max-width: 992px) {
+    .layout-wrapper {
+        flex-direction: column;
+    }
+
     .sidebar {
-        min-height: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        width: 260px;
+        max-width: 80%;
+        min-height: 100vh;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.15);
+    }
+
+    .sidebar .nav-link {
+        margin: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .flex-grow-1 {
+        width: 100%;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1040;
+    }
+
+    .sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .print-header {
+        padding: 12px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .print-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .print-actions button {
+        width: 100%;
     }
 }
 
 /* Job Card Print Styles */
+
+/* Responsive improvements */
+:root {
+    /* Fluid typography */
+    --type-base: clamp(14px, 1.6vw, 16px);
+    --type-lg: clamp(18px, 2.2vw, 22px);
+    --type-sm: clamp(12px, 1.2vw, 14px);
+}
+
+html, body {
+    font-size: var(--type-base);
+}
+
+/* Make images and media fluid */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tables: allow horizontal scroll on narrow screens */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Forms and controls full width on small viewports */
+@media (max-width: 768px) {
+    .form-control,
+    .btn,
+    .input-group .form-control {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .btn + .btn {
+        margin-top: 0.5rem;
+    }
+
+    .navbar .container-fluid {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* Card lists and details adjust for small widths */
+@media (max-width: 992px) {
+    .card-content {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .card-photo {
+        width: 26mm;
+        height: 26mm;
+    }
+
+    .card-details {
+        font-size: var(--type-sm);
+    }
+}
+
+@media (max-width: 576px) {
+    .card-content {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    .card-photo {
+        width: 40%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 0 auto;
+    }
+
+    .card-container {
+        width: calc(100% - 20px);
+        max-width: 360px;
+        margin: 12px auto;
+    }
+
+    .card-header-text {
+        font-size: 7px;
+        line-height: 1.05;
+    }
+}
+
+/* Utility: center content on small devices */
+@media (max-width: 600px) {
+    .text-center-sm {
+        text-align: center;
+    }
+}
+
+/* Slightly tighter spacing for dense UIs */
+.table td, .table th {
+    padding: 0.45rem 0.6rem;
+}
+
+/* End responsive improvements */
 input[type="checkbox"] {
     width: 18px;
     height: 18px;

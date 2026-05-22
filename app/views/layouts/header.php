@@ -9,9 +9,13 @@
     <link href="<?php echo APP_URL; ?>/../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="d-flex">
-    <aside class="sidebar p-3 vh-100">
-        <div class="text-center mb-4">
+<div class="layout-wrapper d-flex">
+    <aside id="sidebar" class="sidebar p-3 vh-100" role="navigation" aria-label="Main navigation">
+        <div class="text-center mb-4 d-flex flex-column align-items-center">
+            <div class="w-100 d-flex justify-content-between align-items-center mb-3 d-lg-none">
+                <div></div>
+                <button class="btn btn-outline-light btn-sm" id="sidebarClose"><i class="fas fa-times"></i></button>
+            </div>
             <img src="<?php echo APP_URL; ?>/../assets/img/logo.png" alt="Courts of Arms" class="img-fluid rounded mb-3" style="max-width: 120px;">
             <div class="navbar-brand text-white">Lands & Physical Planning</div>
         </div>
@@ -42,10 +46,14 @@
             </a>
         </nav>
     </aside>
+    <div class="sidebar-backdrop" aria-hidden="true"></div>
     <div class="flex-grow-1">
         <nav class="navbar navbar-expand bg-white border-bottom px-4">
-            <div class="container-fluid">
-                <div class="navbar-brand mb-0 h1"><?php echo APP_NAME; ?></div>
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-outline-secondary btn-sm d-lg-none" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                    <div class="navbar-brand mb-0 h1"><?php echo APP_NAME; ?></div>
+                </div>
             <div class="d-flex align-items-center gap-3">
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">

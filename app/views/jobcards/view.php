@@ -1,3 +1,18 @@
+<?php
+// Ensure $data['card'] is available when the view is included directly
+if (!isset($data) || !is_array($data)) {
+    $data = [];
+    // If controller provided $card directly, use it
+    if (isset($card) && is_array($card)) {
+        $data['card'] = $card;
+    } elseif (isset($cards) && is_array($cards) && count($cards) === 1) {
+        $data['card'] = $cards[0];
+    } else {
+        $data['card'] = [];
+    }
+}
+?>
+
 <?php require_once dirname(__DIR__, 2) . '/views/layouts/header.php'; ?>
 
 <style>
@@ -165,7 +180,7 @@
     </div>
     <div>
         <a class="btn btn-outline-secondary" href="<?php echo APP_URL; ?>/jobcards">Back</a>
-        <button class="btn btn-primary" onclick="window.print()">Print Card</button>
+        <a class="btn btn-primary" href="<?php echo APP_URL; ?>/jobcards/print?ids=<?php echo $data['card']['id']; ?>" target="_blank" rel="noopener">Print Card</a>
     </div>
 </div>
 

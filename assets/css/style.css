@@ -198,7 +198,7 @@ input[type="checkbox"] {
     gap: 5mm;
 }
 
-/* Ensure proper A4 print layout */
+/* Ensure proper Letter print layout */
 @media print {
     * {
         margin: 0;
@@ -214,7 +214,7 @@ input[type="checkbox"] {
     
     .print-grid {
         grid-template-columns: repeat(2, 1fr);
-        max-width: 210mm;
+        max-width: 215.9mm;
         margin: 0 auto;
         padding: 10mm;
         gap: 5mm;
